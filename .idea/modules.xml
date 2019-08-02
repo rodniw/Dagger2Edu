@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Dagger-2-Advanced-master.iml" filepath="$PROJECT_DIR$/Dagger-2-Advanced-master.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Dagger2Edu.iml" filepath="$PROJECT_DIR$/Dagger2Edu.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bitsandpieces/bitsandpieces.iml" filepath="$PROJECT_DIR$/bitsandpieces/bitsandpieces.iml" />
     </modules>
   </component>
 </project>

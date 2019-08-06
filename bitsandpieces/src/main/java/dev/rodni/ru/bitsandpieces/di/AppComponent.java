@@ -12,6 +12,7 @@ import dev.rodni.ru.bitsandpieces.BaseApplication;
 @Component(
         modules = {
                 AndroidSupportInjectionModule.class,
+                ActivityBuilderModule.class,
         }
 )
 public interface AppComponent extends AndroidInjector<BaseApplication> {

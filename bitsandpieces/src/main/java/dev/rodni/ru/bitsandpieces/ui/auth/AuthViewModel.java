@@ -10,29 +10,35 @@ import androidx.lifecycle.ViewModel;
 
 import javax.inject.Inject;
 
+import dev.rodni.ru.bitsandpieces.SessionManager;
 import dev.rodni.ru.bitsandpieces.models.User;
 import dev.rodni.ru.bitsandpieces.network.auth.AuthApi;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 public class AuthViewModel extends ViewModel {
+    private static final String TAG = "AuthViewModel";
 
     private final AuthApi api;
+    private SessionManager sessionManager;
 
     private MediatorLiveData<AuthResource<User>> authUser = new MediatorLiveData<>();
 
     @Inject
-    public AuthViewModel(AuthApi api) {
+    public AuthViewModel(AuthApi api, SessionManager sessionManager) {
         this.api = api;
+        this.sessionManager = sessionManager;
         Log.i("TAG", "working");
     }
 
     public void authenticateWithId(int id) {
-        //for ui progress bar
-        authUser.setValue(AuthResource.loading(null));
+        Log.i(TAG, "Logging");
+        sessionManager.authenticateWithId(queryUserId(id));
+    }
 
-        final LiveData<AuthResource<User>> source = LiveDataReactiveStreams.fromPublisher(
-                api.getUser(id)
+    private LiveData<AuthResource<User>> queryUserId(int userId) {
+        return LiveDataReactiveStreams.fromPublisher(
+                api.getUser(userId)
                         //in case of some error return from the api
                         .onErrorReturn(throwable -> {
                             User user = new User();
@@ -46,16 +52,11 @@ public class AuthViewModel extends ViewModel {
                             }
                             return AuthResource.authenticated(user);
                         })
-                .subscribeOn(Schedulers.io())
+                        .subscribeOn(Schedulers.io())
         );
-
-        authUser.addSource(source, (AuthResource<User> user) -> {
-            authUser.setValue(user);
-            authUser.removeSource(source);
-        });
     }
 
-    public LiveData<AuthResource<User>> observeUser() {
-        return authUser;
+    public LiveData<AuthResource<User>> observeAuthState() {
+        return sessionManager.getAuthUser();
     }
 }

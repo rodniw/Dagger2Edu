@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.bumptech.glide.RequestManager;
@@ -19,7 +18,6 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import dev.rodni.ru.bitsandpieces.R;
-import dev.rodni.ru.bitsandpieces.models.User;
 import dev.rodni.ru.bitsandpieces.viewmodels.ViewModelProviderFactory;
 
 public class AuthActivity extends DaggerAppCompatActivity implements View.OnClickListener {
@@ -49,7 +47,7 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
     }
 
     private void subscribeObservers() {
-        viewModel.observeUser().observe(this, userAuthResource -> {
+        viewModel.observeAuthState().observe(this, userAuthResource -> {
             if (userAuthResource != null) {
                 switch (userAuthResource.status) {
                     case ERROR:

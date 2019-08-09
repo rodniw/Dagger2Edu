@@ -1,5 +1,6 @@
 package dev.rodni.ru.bitsandpieces.ui.auth;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -18,6 +19,7 @@ import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import dev.rodni.ru.bitsandpieces.R;
+import dev.rodni.ru.bitsandpieces.ui.main.MainActivity;
 import dev.rodni.ru.bitsandpieces.viewmodels.ViewModelProviderFactory;
 
 public class AuthActivity extends DaggerAppCompatActivity implements View.OnClickListener {
@@ -60,6 +62,7 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
                     case AUTHENTICATED:
                         showProgressBar(false);
                         Log.i("TAG", userAuthResource.data.getEmail());
+                        navigateMainScreen();
                         break;
                     case NOT_AUTHENTICATED:
                         showProgressBar(false);
@@ -70,6 +73,12 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
                 }
             }
         });
+    }
+
+    private void navigateMainScreen() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void showProgressBar(boolean isVisible) {

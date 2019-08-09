@@ -5,6 +5,7 @@ import dagger.android.ContributesAndroidInjector;
 import dev.rodni.ru.bitsandpieces.di.auth.AuthModule;
 import dev.rodni.ru.bitsandpieces.di.auth.AuthViewModelsModule;
 import dev.rodni.ru.bitsandpieces.ui.auth.AuthActivity;
+import dev.rodni.ru.bitsandpieces.ui.main.MainActivity;
 
 @Module
 public abstract class ActivityBuilderModule {
@@ -16,4 +17,7 @@ public abstract class ActivityBuilderModule {
             }
     )
     abstract AuthActivity contributeAuthActivity();
+
+    @ContributesAndroidInjector
+    abstract MainActivity contributeMainActivity();
 }

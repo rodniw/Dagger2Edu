@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -22,6 +24,7 @@ import dev.rodni.ru.bitsandpieces.viewmodels.ViewModelProviderFactory;
 
 public class AuthActivity extends DaggerAppCompatActivity implements View.OnClickListener {
     private EditText userInput;
+    private ProgressBar progressBar;
 
     private AuthViewModel viewModel;
 
@@ -34,6 +37,7 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
         userInput = findViewById(R.id.user_id_input);
+        progressBar = findViewById(R.id.progress_bar);
 
         findViewById(R.id.login_button).setOnClickListener(this);
 
@@ -45,11 +49,37 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
     }
 
     private void subscribeObservers() {
-        viewModel.observeUser().observe(this, user -> {
-            if (user != null) {
-                Log.i("tag", "user not null");
+        viewModel.observeUser().observe(this, userAuthResource -> {
+            if (userAuthResource != null) {
+                switch (userAuthResource.status) {
+                    case ERROR:
+                        showProgressBar(false);
+                        Toast.makeText(
+                                AuthActivity.this,
+                                userAuthResource.message + getString(R.string.error_login_question),
+                                Toast.LENGTH_SHORT).show();
+                        break;
+                    case AUTHENTICATED:
+                        showProgressBar(false);
+                        Log.i("TAG", userAuthResource.data.getEmail());
+                        break;
+                    case NOT_AUTHENTICATED:
+                        showProgressBar(false);
+                        break;
+                    case LOADING:
+                        showProgressBar(true);
+                        break;
+                }
             }
         });
+    }
+
+    private void showProgressBar(boolean isVisible) {
+        if (isVisible) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
     private void setLogo() {

@@ -6,6 +6,7 @@ import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
 import dev.rodni.ru.bitsandpieces.di.ViewModelKey;
+import dev.rodni.ru.bitsandpieces.ui.main.posts.PostsViewModel;
 import dev.rodni.ru.bitsandpieces.ui.main.profile.ProfileViewModel;
 
 @Module
@@ -15,4 +16,9 @@ public abstract class MainViewModelsModule {
     @IntoMap
     @ViewModelKey(ProfileViewModel.class)
     public abstract ViewModel bindProfileViewModel(ProfileViewModel viewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(PostsViewModel.class)
+    public abstract ViewModel bindPostsViewModel(PostsViewModel viewModel);
 }

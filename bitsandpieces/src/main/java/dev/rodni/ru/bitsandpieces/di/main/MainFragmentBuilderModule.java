@@ -7,10 +7,6 @@ import dev.rodni.ru.bitsandpieces.ui.main.profile.ProfileFragment;
 @Module
 public abstract class MainFragmentBuilderModule {
 
-    @ContributesAndroidInjector(
-            modules = {
-                    MainFragmentBuilderModule.class,
-            }
-    )
+    @ContributesAndroidInjector
     abstract ProfileFragment contributeProfileFragment();
 }

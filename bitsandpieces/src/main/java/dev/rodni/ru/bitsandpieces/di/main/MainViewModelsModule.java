@@ -14,5 +14,5 @@ public abstract class MainViewModelsModule {
     @Binds
     @IntoMap
     @ViewModelKey(ProfileViewModel.class)
-    public abstract ViewModel bindAuthViewModel(ProfileViewModel viewModel);
+    public abstract ViewModel bindProfileViewModel(ProfileViewModel viewModel);
 }

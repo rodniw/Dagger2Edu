@@ -5,6 +5,7 @@ import dagger.android.ContributesAndroidInjector;
 import dev.rodni.ru.bitsandpieces.di.auth.AuthModule;
 import dev.rodni.ru.bitsandpieces.di.auth.AuthViewModelsModule;
 import dev.rodni.ru.bitsandpieces.di.main.MainFragmentBuilderModule;
+import dev.rodni.ru.bitsandpieces.di.main.MainModule;
 import dev.rodni.ru.bitsandpieces.di.main.MainViewModelsModule;
 import dev.rodni.ru.bitsandpieces.ui.auth.AuthActivity;
 import dev.rodni.ru.bitsandpieces.ui.main.MainActivity;
@@ -24,6 +25,7 @@ public abstract class ActivityBuilderModule {
             modules = {
                     MainFragmentBuilderModule.class,
                     MainViewModelsModule.class,
+                    MainModule.class,
             }
     )
     abstract MainActivity contributeMainActivity();

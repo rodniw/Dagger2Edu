@@ -10,11 +10,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import dev.rodni.ru.bitsandpieces.R;
+import dev.rodni.ru.bitsandpieces.models.User;
 import dev.rodni.ru.bitsandpieces.utils.Constants;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -52,5 +54,12 @@ public class AppModule {
     @Provides
     static Drawable provideAppDrawable(Application application) {
         return ContextCompat.getDrawable(application, R.drawable.koala);
+    }
+
+    @Singleton
+    @Provides
+    @Named("app_user")
+    static User someUser() {
+        return new User();
     }
 }

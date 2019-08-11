@@ -16,13 +16,17 @@ import androidx.lifecycle.ViewModelProviders;
 import com.bumptech.glide.RequestManager;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import dev.rodni.ru.bitsandpieces.R;
+import dev.rodni.ru.bitsandpieces.models.User;
 import dev.rodni.ru.bitsandpieces.ui.main.MainActivity;
 import dev.rodni.ru.bitsandpieces.viewmodels.ViewModelProviderFactory;
 
 public class AuthActivity extends DaggerAppCompatActivity implements View.OnClickListener {
+    private static final String TAG = "AuthActivity";
+
     private EditText userInput;
     private ProgressBar progressBar;
 
@@ -31,6 +35,10 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
     @Inject Drawable logo;
     @Inject RequestManager requestManager;
     @Inject ViewModelProviderFactory providerFactory;
+    @Inject @Named("app_user")
+    User user1;
+    @Inject @Named("auth_user")
+    User user2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,9 @@ public class AuthActivity extends DaggerAppCompatActivity implements View.OnClic
         setLogo();
 
         subscribeObservers();
+
+        Log.d(TAG, "onCreate: " + user1);
+        Log.d(TAG, "onCreate: " + user2);
     }
 
     private void subscribeObservers() {

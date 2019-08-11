@@ -1,6 +1,7 @@
 package dev.rodni.ru.bitsandpieces.di;
 
 import android.app.Application;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 
 import androidx.core.content.ContextCompat;

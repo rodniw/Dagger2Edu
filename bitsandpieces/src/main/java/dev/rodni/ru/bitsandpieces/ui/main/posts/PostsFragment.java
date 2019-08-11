@@ -8,18 +8,15 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import dagger.android.support.DaggerFragment;
 import dev.rodni.ru.bitsandpieces.R;
-import dev.rodni.ru.bitsandpieces.models.Post;
-import dev.rodni.ru.bitsandpieces.ui.main.Resource;
+import dev.rodni.ru.bitsandpieces.utils.VerticalSpacingItemDecoration;
 import dev.rodni.ru.bitsandpieces.viewmodels.ViewModelProviderFactory;
 
 public class PostsFragment extends DaggerFragment {
@@ -28,6 +25,12 @@ public class PostsFragment extends DaggerFragment {
     private PostsViewModel viewModel;
     private RecyclerView recycler;
 
+    @Inject
+    PostsRecyclerAdapter adapter;
+    //@Inject
+    //LinearLayoutManager layoutManager;
+    @Inject
+    VerticalSpacingItemDecoration decorator;
     @Inject
     ViewModelProviderFactory providerFactory;
 
@@ -43,6 +46,7 @@ public class PostsFragment extends DaggerFragment {
 
         viewModel = ViewModelProviders.of(this, providerFactory).get(PostsViewModel.class);
 
+        initRecyclerView();
         subscribeObservers();
     }
 
@@ -51,7 +55,25 @@ public class PostsFragment extends DaggerFragment {
         viewModel.observePosts().observe(getViewLifecycleOwner(), listResource -> {
             if (listResource != null) {
                 Log.i(TAG, "onChanged: " + listResource.data);
+                switch (listResource.status) {
+                    case LOADING:
+                        Log.d(TAG, "subscribeObservers: loading");
+                        break;
+                    case SUCCESS:
+                        Log.d(TAG, "subscribeObservers: success");
+                        adapter.setPosts(listResource.data);
+                        break;
+                    case ERROR:
+                        Log.d(TAG, "subscribeObservers: ERROR " + listResource.message);
+                        break;
+                }
             }
         });
+    }
+
+    private void initRecyclerView() {
+        recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recycler.addItemDecoration(decorator);
+        recycler.setAdapter(adapter);
     }
 }

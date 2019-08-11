@@ -1,5 +1,7 @@
 package dev.rodni.ru.bitsandpieces.di;
 
+import android.content.Context;
+
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 import dev.rodni.ru.bitsandpieces.di.auth.AuthModule;

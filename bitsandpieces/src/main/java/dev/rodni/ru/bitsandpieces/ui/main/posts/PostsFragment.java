@@ -72,7 +72,7 @@ public class PostsFragment extends DaggerFragment {
     }
 
     private void initRecyclerView() {
-        recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recycler.setLayoutManager(layoutManager);
         recycler.addItemDecoration(decorator);
         recycler.setAdapter(adapter);
     }

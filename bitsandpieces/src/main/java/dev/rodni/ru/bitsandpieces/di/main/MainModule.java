@@ -21,7 +21,6 @@ public class MainModule {
         return new PostsRecyclerAdapter();
     }
 
-    @MainScope
     @Provides
     static LinearLayoutManager provideLayoutManager(Application application) {
         return new LinearLayoutManager(application.getApplicationContext());

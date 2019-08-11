@@ -27,8 +27,8 @@ public class PostsFragment extends DaggerFragment {
 
     @Inject
     PostsRecyclerAdapter adapter;
-    //@Inject
-    //LinearLayoutManager layoutManager;
+    @Inject
+    LinearLayoutManager layoutManager;
     @Inject
     VerticalSpacingItemDecoration decorator;
     @Inject

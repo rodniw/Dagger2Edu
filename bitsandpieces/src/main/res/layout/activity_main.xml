@@ -14,8 +14,7 @@
         android:id="@+id/nav_host_fragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/main"
-        />
+        app:navGraph="@navigation/main"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

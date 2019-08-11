@@ -8,13 +8,13 @@
 
     <fragment
         android:id="@+id/profileScreen"
-        android:name=""
+        android:name="dev.rodni.ru.bitsandpieces.ui.main.profile.ProfileFragment"
         android:label="@string/profile"
         tools:layout="@layout/fragment_profile"/>
 
     <fragment
         android:id="@+id/postsScreen"
-        android:name=""
+        android:name="dev.rodni.ru.bitsandpieces.ui.main.posts.PostsFragment"
         android:label="@string/posts"
         tools:layout="@layout/fragment_posts"/>
 
